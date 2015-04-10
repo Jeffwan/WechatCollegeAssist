@@ -1,7 +1,6 @@
 package com.diaosiding.college.util;
 
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -9,8 +8,7 @@ import com.diaosiding.college.model.Exam;
 import com.diaosiding.college.model.ExamMark;
 
 public class ExamUtil {
-	// sort Exam score and calculate avg, max, min
-	
+	// sort Exam score and calculate avg, max, min	
 	public static Exam sortExamMark(Exam exam) {
 		List<ExamMark> examMarks = exam.getExamMarks();
 		

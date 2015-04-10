@@ -11,7 +11,7 @@ public class StudentMessage implements Serializable {
 	
 	private String content;
 	
-	private Date inserTtime;
+	private Date insertTime;
 
 	public int getId() {
 		return id;
@@ -37,12 +37,12 @@ public class StudentMessage implements Serializable {
 		this.content = content;
 	}
 
-	public Date getInserTtime() {
-		return inserTtime;
+	public Date getInsertTime() {
+		return insertTime;
 	}
 
-	public void setInserTtime(Date inserTtime) {
-		this.inserTtime = inserTtime;
+	public void setInsertTime(Date insetTime) {
+		this.insertTime = insertTime;
 	}
 	
 }

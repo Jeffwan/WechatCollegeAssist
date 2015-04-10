@@ -107,7 +107,6 @@ public class ExamMark implements Serializable, Comparable<ExamMark>{
 				+ ", exam=" + exam + "]";
 	}
 
-	@Override
 	public int compareTo(ExamMark o) {
 		return this.mark.compareTo(o.mark);
 	}
