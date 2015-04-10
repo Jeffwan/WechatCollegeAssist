@@ -74,6 +74,11 @@ public class ClassesService {
 		studentDao.addStudent(student);
 	}
 	
+	public void deleteStudentById(int studentid){
+		studentDao.deleteStudentById(studentid);
+	}
+
+	
 	public void updateStudentBy(Student student) {
 		studentDao.updateStudent(student);
 	}
