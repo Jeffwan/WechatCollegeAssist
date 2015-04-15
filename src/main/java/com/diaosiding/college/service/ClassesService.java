@@ -12,7 +12,7 @@ import com.diaosiding.college.model.Classes;
 import com.diaosiding.college.model.ClassesNews;
 import com.diaosiding.college.model.Student;
 
-@Service
+@Service("classesService")
 public class ClassesService {
 	
 	@Autowired
@@ -37,8 +37,8 @@ public class ClassesService {
 		classesNewsDao.deleteClassesNewsById(id);
 	}
 	
-	public List<ClassesNews> findClassesNewsByClassId(int classid){
-		return classesNewsDao.findClassesNewsByClassId(classid, 1000);
+	public List<ClassesNews> findClassesNewsByClassId(int classId){
+		return classesNewsDao.findClassesNewsByClassId(classId, 1000);
 	}
 	
 	
@@ -66,8 +66,8 @@ public class ClassesService {
 		return studentDao.findStudentById(studentId);
 	}
 	
-	public List<Student> findStudentByClassesId(int classesid){
-		return studentDao.findStudentByClassesId(classesid);
+	public List<Student> findStudentByClassesId(int classesId){
+		return studentDao.findStudentByClassesId(classesId);
 	}
 	
 	public void addStudent(Student student){
@@ -88,8 +88,8 @@ public class ClassesService {
 	 * @param classid
 	 */
 	
-	public void updateClassStudentCount(int classid){
-		classesDao.updateClassStudentCount(classid);
+	public void updateClassStudentCount(int classId){
+		classesDao.updateClassStudentCount(classId);
 	}
 	
 }

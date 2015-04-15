@@ -13,7 +13,7 @@ import com.diaosiding.college.model.Exam;
 import com.diaosiding.college.model.ExamMark;
 import com.diaosiding.college.model.Student;
 
-@Service
+@Service("examService")
 public class ExamService {
 
 	@Autowired
@@ -43,8 +43,8 @@ public class ExamService {
 		return examDao.findExam(start, size, exam);
 	}
 	
-	public List<Student> findStudentByClassesId(int classesid) {
-		return studentDao.findStudentByClassesId(classesid);
+	public List<Student> findStudentByClassesId(int classesId) {
+		return studentDao.findStudentByClassesId(classesId);
 	}
 	
 	public Student findStudentById(int studentid){

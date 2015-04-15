@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Student implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+
 	private int id;
 
 	private int classId;
@@ -42,6 +44,12 @@ public class Student implements Serializable{
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", classId=" + classId + ", name=" + name
+				+ ", remark=" + remark + "]";
 	}
 	
 	

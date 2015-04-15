@@ -2,23 +2,24 @@ package com.diaosiding.college.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import javax.annotation.Resource;
 
-import com.diaosiding.college.dao.ClassesDao;
-import com.diaosiding.college.dao.ExamDao;
-import com.diaosiding.college.dao.StudentDao;
-import com.diaosiding.college.dao.StudentMessageDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.diaosiding.college.dao.impl.ClassesDao;
+import com.diaosiding.college.dao.impl.ExamDao;
+import com.diaosiding.college.dao.impl.StudentDao;
+import com.diaosiding.college.dao.impl.StudentMessageDao;
 import com.diaosiding.college.model.Classes;
 import com.diaosiding.college.model.ExamMark;
 import com.diaosiding.college.model.Student;
 import com.diaosiding.college.model.StudentMessage;
 
-@Component
+@Service("studentService")
 public class StudentService {
 
-	
-	@Autowired 
+	@Autowired
 	private StudentDao studentDao; 
 	
 	@Autowired
@@ -54,8 +55,8 @@ public class StudentService {
 		return classesDao.findAllClasses();
 	}
 	
-	public List<StudentMessage> listMessageByStudentId(int studentid,int limit){
-		return studentMessageDao.findStudentMessageByStudentId(studentid, limit);
+	public List<StudentMessage> listMessageByStudentId(int studentId,int limit){
+		return studentMessageDao.findStudentMessageByStudentId(studentId, limit);
 	}
 	
 }

@@ -3,7 +3,11 @@ package com.diaosiding.college.web.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,9 +20,10 @@ import com.diaosiding.college.model.Student;
 import com.diaosiding.college.service.ClassesService;
 
 @Controller
+@Scope("prototype")
 public class ClassesController {
 
-	@Autowired
+	@Resource(name="classesService")
 	private ClassesService classesService;
 	
 	@RequestMapping(value="/manager/classes",method=RequestMethod.GET)
@@ -34,7 +39,7 @@ public class ClassesController {
 		List<Classes> list = classesService.listClasses((num-1) * Constants.pageSize, Constants.pageSize,classes);
 		mv.addObject("classesList", list);
 		mv.addObject("length", list.size());
-		mv.addObject("pagenum", num);
+		mv.addObject("pageNum", num);
 		mv.addObject("classes", classes);
 		
 		
@@ -53,7 +58,7 @@ public class ClassesController {
 	
 	@RequestMapping(value="/manager/addclasses",method=RequestMethod.POST)
 	public ModelAndView addClasses(Classes classes){
-		ModelAndView mv=new ModelAndView();
+		ModelAndView mv = new ModelAndView();
 		Classes cls = classesService.findClassesById(classes.getId());
 		if(cls == null){
 			mv.setViewName("redirect:/manager/classes");
@@ -62,7 +67,7 @@ public class ClassesController {
 		}else{
 			mv.setViewName("redirect:/manager/addclassespage");
 			mv.addObject("name", classes.getName());
-			mv.addObject("headteacher", classes.getHeadTeacher());
+			mv.addObject("headTeacher", classes.getHeadTeacher());
 			mv.addObject("notice", "No. " + classes.getId() + " class already exist");
 		}
 		
@@ -70,10 +75,10 @@ public class ClassesController {
 	}
 	
 	@RequestMapping(value="/manager/managerstudentpage",method=RequestMethod.GET)
-	public ModelAndView studentPage(int classesid){
+	public ModelAndView studentPage(int classesId){
 		ModelAndView mv=new ModelAndView();
-		Classes cls = classesService.findClassesById(classesid);
-		List<Student> stlist = classesService.findStudentByClassesId(classesid);
+		Classes cls = classesService.findClassesById(classesId);
+		List<Student> stlist = classesService.findStudentByClassesId(classesId);
 		
 		mv.setViewName("addstudents");
 		mv.addObject("sidebar","classes");
@@ -99,11 +104,13 @@ public class ClassesController {
 	
 	@RequestMapping(value="/manager/addclassesnews",method=RequestMethod.POST)
 	public ModelAndView addClassesNews(ClassesNews classesNews){
-		ModelAndView mv=new ModelAndView();
+		ModelAndView mv = new ModelAndView();
+		
 		classesNews.setInsertTime(new Date());
 		classesService.addClassesNews(classesNews);
+		
 		mv.addObject("notice","Add class news successfully");
-		mv.addObject("classesid",classesNews.getClassId());
+		mv.addObject("classesId", classesNews.getClassId());
 		mv.setViewName("redirect:/manager/classesnewspage");
 		
 		return mv;
@@ -111,10 +118,11 @@ public class ClassesController {
 	
 	
 	@RequestMapping(value="/manager/deleteclassesnews",method=RequestMethod.GET)
-	public ModelAndView deleteClassesNews(int classesid,int id){
+	public ModelAndView deleteClassesNews(int classesId,int id){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("redirect:/manager/classesnewspage");
-		mv.addObject("classesid",classesid);
+		mv.addObject("classesId", classesId);
+		classesService.deleteClassesNewsById(id);
 		mv.addObject("notice","Delete class news successfully");
 		
 		return mv;
@@ -127,22 +135,24 @@ public class ClassesController {
 		Student stu = classesService.findStudentById(student.getId());
 		if(stu == null){
 			classesService.addStudent(student);
+			System.out.println(student);
 			classesService.updateClassStudentCount(student.getClassId());
 			mv.addObject("notice","Add student successfully");
 		}else{
 			mv.addObject("notice","No. "+student.getId()+" ("+stu.getName()+") exist!");
 		}
-		mv.addObject("classesid",student.getClassId());
+		
+		mv.addObject("classesId",student.getClassId());
 		mv.setViewName("redirect:/manager/managerstudentpage");
 		return mv;
 	}
 	
 	@RequestMapping(value="/manager/deletestudent",method=RequestMethod.GET)
-	public ModelAndView deleteStudent(int studentid,int classid){
+	public ModelAndView deleteStudent(int studentId,int classId){
 		ModelAndView mv=new ModelAndView();
-		classesService.deleteStudentById(studentid);
-		classesService.updateClassStudentCount(classid);
-		mv.addObject("classesid",classid);
+		classesService.deleteStudentById(studentId);
+		classesService.updateClassStudentCount(classId);
+		mv.addObject("classesId",classId);
 		mv.addObject("notice","Delete student info successfully");
 		mv.setViewName("redirect:/manager/managerstudentpage");
 		return mv;
@@ -152,7 +162,7 @@ public class ClassesController {
 	public ModelAndView updateStudent(Student student){
 		ModelAndView mv = new ModelAndView();
 		classesService.updateStudentBy(student); 
-		mv.addObject("classesid",student.getClassId());
+		mv.addObject("classesId",student.getClassId());
 		mv.addObject("notice","Edit student info successfully");
 		mv.setViewName("redirect:/manager/managerstudentpage");
 		return mv;

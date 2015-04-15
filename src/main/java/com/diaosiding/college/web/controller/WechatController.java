@@ -4,9 +4,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,9 +22,10 @@ import com.diaosiding.college.service.WechatService;
 import com.diaosiding.college.util.WechatUtil;
 
 @Controller
+@Scope("prototype")
 public class WechatController {
 
-	@Autowired
+	@Resource(name="wechatService")
 	private WechatService wechatService; 
 	
 	@RequestMapping(value="/wechat", method=RequestMethod.POST, produces="text/html;charset=UTF-8")
@@ -116,33 +119,37 @@ public class WechatController {
 		}
 		
 		@RequestMapping(value="/manager/messages",method=RequestMethod.GET)
-		public ModelAndView listMessage(String pagenum){
-			ModelAndView mv=new ModelAndView();
+		public ModelAndView listMessage(String pageNum){
+			ModelAndView mv = new ModelAndView();
 			mv.addObject("sidebar","messages");
 			mv.setViewName("messages");
+			
 			int num = 1;
-			if(null!=pagenum){
-				num = Integer.parseInt(pagenum);
+			if(pageNum != null){
+				num = Integer.parseInt(pageNum);
 			}
+			
 			List<Message> list = wechatService.listMessage((num-1) * Constants.pageSize, Constants.pageSize);
 			mv.addObject("messageList", list);
-			mv.addObject("pagenum", num);
+			mv.addObject("pageNum", num);
 			mv.addObject("length", list.size());
 			return mv;
 		}
 		
 		@RequestMapping(value="/manager/replys",method=RequestMethod.GET)
-		public ModelAndView listReply(String pagenum){
-			ModelAndView mv=new ModelAndView();
+		public ModelAndView listReply(String pageNum){
+			ModelAndView mv = new ModelAndView();
 			mv.addObject("sidebar","replys");
 			mv.setViewName("replys");
+			
 			int num = 1;
-			if(null!=pagenum){
-				num = Integer.parseInt(pagenum);
+			if(pageNum != null){
+				num = Integer.parseInt(pageNum);
 			}
+			
 			List<Reply> list = wechatService.listReply((num-1)* Constants.pageSize, Constants.pageSize);
 			mv.addObject("replyList", list);
-			mv.addObject("pagenum", num);
+			mv.addObject("pageNum", num);
 			mv.addObject("length", list.size());
 			return mv;
 		}

@@ -1,9 +1,12 @@
 package com.diaosiding.college.web.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,15 +21,17 @@ import com.diaosiding.college.service.StudentService;
 
 
 @Controller
+@Scope("prototype")
 public class StudentController {
 
-	@Autowired
+	@Resource(name="studentService")
 	private StudentService studentService; 
 	
 	@RequestMapping(value="/manager/students", method=RequestMethod.GET)
 	public ModelAndView listStudent(String pageNum, Student student) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("student");
+		
+		mv.setViewName("students");
 		mv.addObject("sidebar", "students");
 		int num = 1;
 		
@@ -73,11 +78,11 @@ public class StudentController {
 		if (student == null) {
 			mv.setViewName("redirect:/manager/students");
 		} else {
-			mv.setViewName("addstudentmessage");
+			mv.setViewName("examdetail");
 			mv.addObject("sidebar","students");
 			mv.addObject("student",student);
 			List<ExamMark> list = studentService.findExamMarkByStudentId(studentId, 100);
-			mv.addObject("studentMessageList", list);
+			mv.addObject("emlist", list);
 		}
 		
 		return mv;
@@ -87,7 +92,7 @@ public class StudentController {
 	public ModelAndView addmessage(StudentMessage studentMessage){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("redirect:/manager/leavemessage");
-		mv.addObject("studentid",studentMessage.getStudentId());
+		mv.addObject("studentId",studentMessage.getStudentId());
 		studentMessage.setInsertTime(new Date());
 		
 		studentService.addStudentMessage(studentMessage);
@@ -96,10 +101,10 @@ public class StudentController {
 	}
 	
 	@RequestMapping(value="/manager/deletemessage",method=RequestMethod.GET)
-	public ModelAndView deletemessage(int studentid, int messageId){
+	public ModelAndView deletemessage(int studentId, int messageId){
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:/manager/leavemessage");
-		mv.addObject("studentid",studentid);
+		mv.addObject("studentId",studentId);
 		studentService.deleteStudentMessageById(messageId);
 		mv.addObject("notice","Delete Message Successfully");
 		return mv;

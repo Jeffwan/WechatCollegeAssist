@@ -3,7 +3,9 @@ package com.diaosiding.college.web.controller;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,9 +19,10 @@ import com.diaosiding.college.service.ExamService;
 import com.diaosiding.college.util.ExamUtil;
 
 @Controller
+@Scope("prototype")
 public class ExamController {
 
-	@Autowired
+	@Resource(name="examService")
 	private ExamService examService;
 	
 	@RequestMapping(value="/manager/exams",method=RequestMethod.GET)
@@ -29,16 +32,16 @@ public class ExamController {
 		mv.addObject("sidebar","exams");
 		
 		int num = 1;
-		if(pageNum != null){
+		if (pageNum != null) {
 			num = Integer.parseInt(pageNum);
 		}
 		
-		List<Exam> list = examService.listExam((num-1) * Constants.pageSize, Constants.pageSize,exam);
+		List<Exam> list = examService.listExam((num - 1) * Constants.pageSize, Constants.pageSize, exam);
 		List<Classes> clslist = examService.findAllClasses();
 		mv.addObject("examList", list);
 		mv.addObject("clsList", clslist);
 		mv.addObject("length", list.size());
-		mv.addObject("pagenum", num);
+		mv.addObject("pageNum", num);
 		mv.addObject("exam", exam);
 		
 		return mv;
@@ -51,9 +54,9 @@ public class ExamController {
 		ModelAndView mv = new ModelAndView();
 		
 		mv.setViewName("addexam");
-		mv.addObject("sidebar","exams");
-		mv.addObject("exam",exam);
-		mv.addObject("stlist",stlist);
+		mv.addObject("sidebar", "exams");
+		mv.addObject("exam", exam);
+		mv.addObject("stlist", stlist);
 		
 		return mv;
 	}

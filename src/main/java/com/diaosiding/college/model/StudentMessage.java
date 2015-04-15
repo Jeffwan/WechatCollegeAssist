@@ -41,7 +41,7 @@ public class StudentMessage implements Serializable {
 		return insertTime;
 	}
 
-	public void setInsertTime(Date insetTime) {
+	public void setInsertTime(Date insertTime) {
 		this.insertTime = insertTime;
 	}
 	

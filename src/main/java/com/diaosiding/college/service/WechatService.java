@@ -22,7 +22,7 @@ import com.diaosiding.college.model.Reply;
 import com.diaosiding.college.model.Student;
 import com.diaosiding.college.model.StudentMessage;
 
-@Service
+@Service("wechatService")
 public class WechatService {
 
 	@Autowired
