@@ -38,12 +38,12 @@
 	</typeAliases>
     <mappers>
     	<mapper resource="com/diaosiding/college/dao/sqlmap/ReplyMapper.xml"/>
-    	<mapper resource="om/diaosiding/college/dao/sqlmap/MessageMapper.xml"/>
-    	<mapper resource="om/diaosiding/college/dao/sqlmap/StudentMapper.xml"/>
-    	<mapper resource="om/diaosiding/college/dao/sqlmap/ExamMapper.xml"/>
-    	<mapper resource="om/diaosiding/college/dao/sqlmap/StudentMessageMapper.xml"/>
-    	<mapper resource="om/diaosiding/college/dao/sqlmap/ClassesNewsMapper.xml"/>
-    	<mapper resource="om/diaosiding/college/dao/sqlmap/ClassesMapper.xml"/>
+    	<mapper resource="com/diaosiding/college/dao/sqlmap/MessageMapper.xml"/>
+    	<mapper resource="com/diaosiding/college/dao/sqlmap/StudentMapper.xml"/>
+    	<mapper resource="com/diaosiding/college/dao/sqlmap/ExamMapper.xml"/>
+    	<mapper resource="com/diaosiding/college/dao/sqlmap/StudentMessageMapper.xml"/>
+    	<mapper resource="com/diaosiding/college/dao/sqlmap/ClassesNewsMapper.xml"/>
+    	<mapper resource="com/diaosiding/college/dao/sqlmap/ClassesMapper.xml"/>
     </mappers>
 
 </configuration>

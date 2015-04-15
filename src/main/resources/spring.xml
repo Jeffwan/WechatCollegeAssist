@@ -13,33 +13,71 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
 <tx:annotation-driven transaction-manager="transactionManager"/>
-<context:annotation-config></context:annotation-config>
-<context:component-scan base-package="com.diaosiding.college"></context:component-scan>
-
+<context:annotation-config />
+<context:component-scan base-package="com.diaosiding.college" />
 
 <!-- load configuration files -->
 <bean id="propertyConfurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 	<property name="locations">
 		<list>
-			<value>classpath:db.properties</value>
+			<value>classpath*:db.properties</value>
 		</list>
 	</property>
 </bean>
 
-
 <!-- configure read factory, slaves -->
 
-<bean id="readDataSource"></bean>
+<bean id="readDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="jdbcUrl">
+            <value><![CDATA[jdbc:mysql://${db.read.host}:${db.read.port}/${db.read.database}?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true]]></value>
+        </property>
+        <property name="user"               value="${db.read.userName}" />
+        <property name="password"           value="${db.read.password}" />
+        <property name="maxPoolSize"        value="12" />
+        <property name="minPoolSize"        value="0" />
+        <property name="maxStatements"      value="100" />
+        <property name="initialPoolSize"    value="3" />
+        <property name="maxIdleTime"        value="10"/>
+        <property name="idleConnectionTestPeriod"   value="10" />
+        <property name="testConnectionOnCheckin"    value="true" />
+        <property name="testConnectionOnCheckout"   value="false" />
+        <property name="preferredTestQuery"         value="SELECT 1 FROM DUAL" />
+</bean>
 
+    <bean id="readSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="readDataSource" />
+		<property name="configLocation" value="classpath:sqlMapConfig.xml"/>
+	</bean>
+    
+    
+    <bean id="readSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="readSqlSessionFactory" />
+	</bean>
 
+<bean id="writeDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+<property name="driverClass" value="com.mysql.jdbc.Driver" />
+        <property name="jdbcUrl">
+            <value><![CDATA[jdbc:mysql://${db.write.host}:${db.write.port}/${db.write.database}?useUnicode=true&characterEncoding=gbk&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true]]></value>
+        </property>
+        <property name="user"               value="${db.write.userName}" />
+        <property name="password"           value="${db.write.password}" />
+        <property name="maxPoolSize"        value="12" />
+        <property name="minPoolSize"        value="0" />
+        <property name="maxStatements"      value="100" />
+        <property name="initialPoolSize"    value="3" />
+        <property name="maxIdleTime"        value="10"/>
+        <property name="idleConnectionTestPeriod"   value="10" />
+        <property name="testConnectionOnCheckin"    value="true" />
+        <property name="testConnectionOnCheckout"   value="false" />
+        <property name="preferredTestQuery"         value="SELECT 1 FROM DUAL" />
 
-
-<bean id="writeDataSource"></bean>
+</bean>
 
 <!-- configure write factory. master -->
 <bean id="writeSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 	<property name="dataSource" ref="writeDataSource"/>
-	<property name="configLocation" ref="classpath:sqlMapConfig.xml"/>
+	<property name="configLocation" value="classpath:sqlMapConfig.xml"/>
 </bean>
 
 <bean id="writeSqlSession" class="org.mybatis.spring.SqlSessionTemplate">
