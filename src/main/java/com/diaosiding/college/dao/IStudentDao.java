@@ -10,11 +10,11 @@ public interface IStudentDao {
 
 	public List<Student> findStudent(int start, int size, Student student);
 
-	public List<Student> findStudentByClassesId(int classesid);
+	public List<Student> findStudentByClassesId(int classesId);
 
 	public int addStudent(Student student);
 
-	public int deleteStudentById(int studentid);
+	public int deleteStudentById(int studentId);
 
 	public int updateStudent(Student student);
 

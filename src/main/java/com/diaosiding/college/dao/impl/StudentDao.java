@@ -1,15 +1,17 @@
-package com.diaosiding.college.dao;
+package com.diaosiding.college.dao.impl;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import com.diaosiding.college.dao.BaseDao;
+import com.diaosiding.college.dao.IStudentDao;
 import com.diaosiding.college.model.Constants;
 import com.diaosiding.college.model.Student;
 
-@Component
+@Repository
 public class StudentDao extends BaseDao implements IStudentDao{
 
 	public Student findStudentById(int id) {
@@ -24,8 +26,8 @@ public class StudentDao extends BaseDao implements IStudentDao{
 		return this.readSqlSession.selectList(Constants.DAONAMESPACE + ".StudentDao" + ".selectStudent",map);
 	}
 	
-	public List<Student> findStudentByClassesId(int classesid) {
-		return this.readSqlSession.selectList(Constants.DAONAMESPACE + ".StudentDao" + ".selectStudentByClassesId",classesid);
+	public List<Student> findStudentByClassesId(int classesId) {
+		return this.readSqlSession.selectList(Constants.DAONAMESPACE + ".StudentDao" + ".selectStudentByClassesId",classesId);
 	}
 	
 	public int addStudent(Student student) {

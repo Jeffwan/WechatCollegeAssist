@@ -1,16 +1,19 @@
-package com.diaosiding.college.dao;
+package com.diaosiding.college.dao.impl;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import com.diaosiding.college.dao.BaseDao;
+import com.diaosiding.college.dao.IExamDao;
 import com.diaosiding.college.model.Constants;
 import com.diaosiding.college.model.Exam;
 import com.diaosiding.college.model.ExamMark;
 
-@Component
+@Repository
 public class ExamDao extends BaseDao implements IExamDao{
 
 	public List<ExamMark> findExamMarkByStudentId(int studentId, int limit) {
@@ -35,7 +38,7 @@ public class ExamDao extends BaseDao implements IExamDao{
 	}
 	
 	public void addExamMark(ExamMark examMark) {
-		writerSqlSession.insert(Constants.DAONAMESPACE + ".ExamDao" + ".addExamPark", examMark);
+		writerSqlSession.insert(Constants.DAONAMESPACE + ".ExamDao" + ".addExamMark", examMark);
 	}
 	
 	public Exam findExamById(int id) {
