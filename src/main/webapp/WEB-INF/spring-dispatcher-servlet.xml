@@ -26,13 +26,13 @@
 	   </property>  
 	</bean>	
     	
-      <context:component-scan base-package="com.diaosiding.college"/>
+      <context:component-scan base-package="com.diorsding.college"/>
       <mvc:annotation-driven />
       
       <mvc:interceptors>
           <mvc:interceptor>
 			<mvc:mapping path="/manager/**"/>              
-			<bean class="com.diaosiding.college.web.interceptor.ManagerInterceptor" />
+			<bean class="com.diorsding.college.web.interceptor.ManagerInterceptor" />
           </mvc:interceptor>
       </mvc:interceptors>
       

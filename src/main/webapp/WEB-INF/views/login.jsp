@@ -36,9 +36,7 @@
 											<i class="icon-leaf green"></i>
 											<span class="red">&nbsp;学校小助手</span>
 											<span class="white"></span>
-											
 										</h1>
-										<h4 class="blue">&copy; <a href="http://weibo.com/2098099627" target="_blank">屌丝丁同学</a></h4>
 									</div>
 								</div>
 	
@@ -94,7 +92,7 @@
 														</fieldset>
 													</form>
 													<div class="social-or-login center">
-													<span class="bigger-110">学校小助手(aixuexiao)</span>
+													<span class="bigger-110">学校小助手(wechat college assist)</span>
 													</div>
 													
 													<div class="social-login center">
