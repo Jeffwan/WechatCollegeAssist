@@ -45,17 +45,17 @@ public class WechatController {
 					String process = cs[1];//操作
 					try {
 						studentid = Integer.parseInt(cs[0]);
-						if("考试".equals(process)){
+						if("exam".equals(process)){
 							replyContent = wechatService.getSingleExamMarkStringByStudentId(studentid);
-						}else if("考试历史".equals(process)){
+						}else if("history".equals(process)){
 							replyContent = wechatService.getExamMarkHistoryStringByStudentId(studentid);
-						}else if("留言".equals(process)){
+						}else if("comments".equals(process)){
 							replyContent = wechatService.getSingleStudentMessageByStudentId(studentid);
-						}else if("留言历史".equals(process)){
+						}else if("commentHistory".equals(process)){
 							replyContent = wechatService.getStudentMessageHistoryByStudentId(studentid);
-						}else if("动态".equals(process)){
+						}else if("news".equals(process)){
 							replyContent = wechatService.getSingleClassesNewsByStudentId(studentid);
-						}else if("动态历史".equals(process)){
+						}else if("newsHistory".equals(process)){
 							replyContent = wechatService.getClassesNewsHistoryByStudentId(studentid);
 						} 
 					} catch (NumberFormatException e) {

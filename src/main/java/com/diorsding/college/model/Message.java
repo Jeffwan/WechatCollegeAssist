@@ -158,9 +158,17 @@ public class Message implements Serializable{
 	public void setEventKey(String eventKey) {
 		this.eventKey = eventKey;
 	}
-    
-    
-    
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", toUserName=" + toUserName
+				+ ", fromUserName=" + fromUserName + ", createTime="
+				+ createTime + ", msgType=" + msgType + ", msgId=" + msgId
+				+ ", content=" + content + ", picUrl=" + picUrl + ", title="
+				+ title + ", description=" + description + ", url=" + url
+				+ ", locationX=" + locationX + ", locationY=" + locationY
+				+ ", scale=" + scale + ", label=" + label + ", event=" + event
+				+ ", eventKey=" + eventKey + "]";
+	}
     
     
 	

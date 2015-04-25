@@ -57,16 +57,16 @@ public class WechatService {
 				ExamMark em = list.get(0);
 				Exam e = em.getExam();
 				DateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-				sb.append(")最近一次考试记录如下:\n").append("Exam：").append(e.getCourse())
-				  .append("\n分数：").append(em.getMark())
-				  .append("\n班级排名：").append(em.getRank())
-				  .append("\n考试时间：").append(sf.format(em.getExamTime()))
-				  .append("\n老师备注：").append(em.getRemark())
-				  .append("\n试卷满分：").append(e.getFullMarks())
-				  .append("\n班级均分：").append(e.getAverage())
-				  .append("\n班级最高分：").append(e.getTopMark())
-				  .append("\n班级最低分：").append(e.getLowestMark())
-				  .append("\n考试说明：").append(e.getRemark());
+				sb.append(")last exam record:\n").append("Exam：").append(e.getCourse())
+				  .append("\nscore:").append(em.getMark())
+				  .append("\nrank:").append(em.getRank())
+				  .append("\ntime:").append(sf.format(em.getExamTime()))
+				  .append("\nremark:").append(em.getRemark())
+				  .append("\nfullScore:").append(e.getFullMarks())
+				  .append("\nAverage:").append(e.getAverage())
+				  .append("\nHighest:").append(e.getTopMark())
+				  .append("\nLowest:").append(e.getLowestMark())
+				  .append("\nRemark").append(e.getRemark());
 			}
 		}
 		return sb.toString();
@@ -207,6 +207,8 @@ public class WechatService {
 	
 	
 	public void addMessage(Message message) {
+		System.out.println("addMessage: " + message);
+		
 		messageDao.addMessage(message);
 	}
 	

@@ -37,13 +37,13 @@
    		 <typeAlias alias="ClassesNews"  type="com.diorsding.college.model.ClassesNews" />
 	</typeAliases>
     <mappers>
-    	<mapper resource="com/diorsding/college/dao/sqlmap/ReplyMapper.xml"/>
-    	<mapper resource="com/diorsding/college/dao/sqlmap/MessageMapper.xml"/>
-    	<mapper resource="com/diorsding/college/dao/sqlmap/StudentMapper.xml"/>
-    	<mapper resource="com/diorsding/college/dao/sqlmap/ExamMapper.xml"/>
-    	<mapper resource="com/diorsding/college/dao/sqlmap/StudentMessageMapper.xml"/>
-    	<mapper resource="com/diorsding/college/dao/sqlmap/ClassesNewsMapper.xml"/>
-    	<mapper resource="com/diorsding/college/dao/sqlmap/ClassesMapper.xml"/>
+    	<mapper resource="sqlmap/ReplyMapper.xml"/>
+    	<mapper resource="sqlmap/MessageMapper.xml"/>
+    	<mapper resource="sqlmap/StudentMapper.xml"/>
+    	<mapper resource="sqlmap/ExamMapper.xml"/>
+    	<mapper resource="sqlmap/StudentMessageMapper.xml"/>
+    	<mapper resource="sqlmap/ClassesNewsMapper.xml"/>
+    	<mapper resource="sqlmap/ClassesMapper.xml"/>
     </mappers>
 
 </configuration>

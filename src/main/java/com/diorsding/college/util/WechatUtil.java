@@ -137,6 +137,8 @@ public class WechatUtil {
 				map.put(e.getName(), e.getText());
 			}
 			
+			System.out.println(map);
+			
 			inputStream.close();
 			inputStream = null;
 			
